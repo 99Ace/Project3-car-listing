@@ -34,28 +34,20 @@ data_ref = conn[DATABASE_NAME][COLLECTION_REF]
 # STEP 1 - Create a home route and test it
 @app.route('/') # map the root route to the index function
 def index():
-    return render_template ("index.html")
-
-@app.route('/vehicle/view')
-def view_listing():
     results = datalink.find({})
-    
     # for i in results:
     #     results[i].car_specs.reg_date = datetime.datetime.strftime(results[i].car_specs.reg_date, '%d.%m.%Y')
-    return render_template ("view_listing.html", detail=results)
+    return render_template ("index.html", detail=results)
     
 
 @app.route('/vehicle/add')
 def add_listing():
     results = data_ref.find({})
- 
     return render_template('add_listing.html', detail=results) 
-    
-    
     
 @app.route('/vehicle/add_process')
 def insert_listing():
-    return render_template('view_listing.html')
+    return render_template('index.html')
 
 @app.route('/vehicle/edit')
 def edit_listing():
