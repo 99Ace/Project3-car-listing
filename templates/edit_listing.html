@@ -14,7 +14,7 @@
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <style>
   </style>
-  <title>Buy Used Car | Best Deal</title>
+  <title>New Vehicle</title>
 </head>
 
 <body>
@@ -49,19 +49,105 @@
         </form>
       </div>
     </nav>
-    
-    <!--Overview of CRUD buttons-->
-  <h2>Panels with Contextual Classes</h2>
-  <section class="panel-group">
-    <H1>EDIT VEHICLE</H1>
-  </section>
-    
+    <div class="p-5">
+
+      <form class="form-group w-50" method="POST">
+        <table class="table">
+          <thead>
+            <th colspan="2"><i>PLEASE ENTER YOUR CAR DETAILS BELOW</i></th>
+          </thead>
+          <tbody>
+            <!--Car Make Selector (Pre-defined and restricted to a few make)-->
+            <tr>
+              <th scope="col">Car Make</th>
+              <td scope="col">
+                <select name="car-make" class="form-control">
+                  <option value="Audi">Audi</option>                    
+                  <option value="Mercedes-Benz">Mercedes-Benz</option>                    
+                  <option value="BMW">BMW</option>                    
+                  <option value="Volvo">Volvo</option>                    
+                  <option value="Jaguar">Jaguar</option>                    
+                </select>
+              </td>
+            </tr>
+            <!--Car Model Entry Box-->
+            <tr>
+              <th scope="col">Car Model</th>
+              <td scope="col"><input type="text" name="car-model" class="form-control" value='{{ v['car_tag'].car_model}}'>
+              </td>
+            </tr>
+            <!--Year of make Entry Box-->
+            <tr>
+              <th scope="col">Year Of Make</th>
+              <td scope="col">
+                <div class="input-group">
+                 <select id='year' name="year" class="form-control"></select>
+                </div>
+              </td>
+            </tr>
+            <!--Asking Price Entry Box-->
+            <tr>
+              <th scope="col">Asking Price</th>
+              <td scope="col"><input type="text" name="car-price" class="form-control" value='{{ v['car_price'] }}'/></td>
+            </tr>
+            <!--Mileage Entry Box-->
+            <tr>
+              <th scope="col">Mileage</th>
+              <td scope="col"><input type="text" name="mileage" class="form-control" value='{{ v['mileage'] }}'/></td>
+            </tr>
+            <!--Car Description Textbox Entry-->
+            <tr>
+              <th scope="col">Car Description</th>
+              <td scope="col"><textarea name='description' class="form-control" aria-label="With textarea" >{{ v.description }}</textarea></td>
+            </tr>
+            <!--Vehicle Type selector-->
+            <tr>
+              <th scope="row">Vehicle Type</th>
+              <td>
+                <select name='car-type' class="form-control">
+                  <option value="Hybrid Car">Hybrid Car</option>                    
+                  <option value="Hatchback">Hatchback</option>                    
+                  <option value="Luxury Sedan">Luxury Sedan</option>                    
+                  <option value="MPV">MPV</option>                    
+                  <option value="Mid-sized Sedan">Mid-sized Sedan</option>                    
+                  <option value="Sports">Sports</option>                    
+                  <option value="Stationwagon">Stationwagon</option>                    
+                  <option value="SUV">SUV</option> 
+                </select>
+              </td>
+            </tr>
+            <!--Car Availablility-->
+            <tr>
+            <th colspan="2">            
+              <label name='availability' class="radio-inline"><input type="radio" value="true" checked> Available </label>
+              <label name='availability' class="radio-inline"><input type="radio" value="false" ><span style="color:red"> Sold </span></label>
+            </th>
+            </tr>
+          </tbody>
+        </table>
+        <hr/>
+
+        <a class="btn btn-danger" href="{{ url_for('index') }}">Back</a>
+        <input type='submit' value='Add to Listing' class='btn btn-primary'  />
+
+      </form>
+    </div>
   </main>
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script type="text/javascript" src="script.js"></script>
+  <script>
+  /*global $*/
+    $(function(){
+     $('#year').html(function(){
+        for (let i=2000;i<=2019;i++){
+          $('#year').append($('<option></option>').val(i).html(i))
+        }
+      })
+    });
+ </script>
 </body>
 
 </html>

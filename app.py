@@ -35,7 +35,6 @@ datalink = conn[DATABASE_NAME][COLLECTION_NAME]
 def index():
     results = datalink.find({})
     return render_template ("index.html", detail=results)
-    
 
 @app.route('/vehicle/add')
 def add_listing():
@@ -69,17 +68,24 @@ def insert_listing():
         },
         'car_price' : car_price,
         'mileage': mileage,
-        'description': description
+        'description': description.capitalize() 
     })
     
     return redirect(url_for('index'))
     
-@app.route('/vehicle/edit')
-def edit_listing():
-    return render_template('edit_listing.html')
+@app.route('/vehicle/<taskid>/edit')
+def edit_listing(taskid):
+    vehicle = datalink.find_one({
+        "_id":ObjectId(taskid)
+    })
+    return render_template('edit_listing.html', v=vehicle)
 
-@app.route('/vehicle/delete')
-def delete_listing():
+def update_listing(taskid):
+    
+    return redirect(url_for('index'))
+
+@app.route('/vehicle/<taskid>/delete')
+def delete_listing(taskid):
     return render_template('delete_listing.html')
 
 
