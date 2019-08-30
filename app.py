@@ -3,13 +3,13 @@ from flask import Flask, render_template, request, redirect, url_for
 import os
 import pymongo	
 import datetime
+from bson.objectid import ObjectId
 
 app = Flask(__name__)
 	
 MONGO_URI = os.getenv('MONGO_URI')
 DATABASE_NAME = 'cars_listing'
 COLLECTION_NAME = 'car_plate'
-COLLECTION_REF = 'car_menu'
 
 # upload_dir = "/static/uploads/images/"
 # TOP_LEVEL_DIR = os.path.abspath(os.curdir)
@@ -29,26 +29,51 @@ COLLECTION_REF = 'car_menu'
 # 0.2. Create the connection
 conn = pymongo.MongoClient(MONGO_URI)
 datalink = conn[DATABASE_NAME][COLLECTION_NAME]
-data_ref = conn[DATABASE_NAME][COLLECTION_REF]
 
 # STEP 1 - Create a home route and test it
 @app.route('/') # map the root route to the index function
 def index():
     results = datalink.find({})
-    # for i in results:
-    #     results[i].car_specs.reg_date = datetime.datetime.strftime(results[i].car_specs.reg_date, '%d.%m.%Y')
     return render_template ("index.html", detail=results)
     
 
 @app.route('/vehicle/add')
 def add_listing():
-    results = data_ref.find({})
-    return render_template('add_listing.html', detail=results) 
+    return render_template('add_listing.html', data={}) 
     
-@app.route('/vehicle/add_process')
+@app.route('/vehicle/add', methods=["POST"])
 def insert_listing():
-    return render_template('index.html')
-
+    # Getting the data from the form
+    car_make = request.form.get('car-make')
+    car_model = request.form.get('car-model')
+    reg_year = int(request.form.get('year'))
+    car_price = int(request.form.get('car-price'))
+    mileage = int(request.form.get('mileage'))
+    description = request.form.get('description')
+    car_type = request.form.get('car-type')
+    
+    availability_check = request.form.get('availability')
+    if (availability_check):
+        availability = True
+    else:
+        availability = False
+    
+    
+    datalink.insert({
+        'car_tag' : {
+            'car_make' : car_make, # right hand side title is not in quotes, so it's a variable
+            'car_model': car_model,
+            'year_of_make':reg_year,
+            'car_type': car_type,
+            'availability':availability
+        },
+        'car_price' : car_price,
+        'mileage': mileage,
+        'description': description
+    })
+    
+    return redirect(url_for('index'))
+    
 @app.route('/vehicle/edit')
 def edit_listing():
     return render_template('edit_listing.html')
