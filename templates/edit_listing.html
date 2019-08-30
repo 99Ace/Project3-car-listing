@@ -62,11 +62,11 @@
               <th scope="col">Car Make</th>
               <td scope="col">
                 <select name="car-make" class="form-control">
-                  <option value="Audi">Audi</option>                    
-                  <option value="Mercedes-Benz">Mercedes-Benz</option>                    
-                  <option value="BMW">BMW</option>                    
-                  <option value="Volvo">Volvo</option>                    
-                  <option value="Jaguar">Jaguar</option>                    
+                  <option value="Audi" {% if v['car_tag'].car_make == 'Audi' %} selected="selected"{% endif %}>Audi</option>                    
+                  <option value="Mercedes-Benz" {% if v['car_tag'].car_make == 'Mercedes-Benz' %} selected="selected"{% endif %}>Mercedes-Benz</option>                    
+                  <option value="BMW" {% if v['car_tag'].car_make == 'BMW' %} selected="selected"{% endif %}>BMW</option>                    
+                  <option value="Volvo" {% if v['car_tag'].car_make == 'Volvo' %} selected="selected"{% endif %}>Volvo</option>                    
+                  <option value="Jaguar" {% if v['car_tag'].car_make == 'Jaguar' %} selected="selected"{% endif %}>Jaguar</option>                    
                 </select>
               </td>
             </tr>
@@ -81,7 +81,28 @@
               <th scope="col">Year Of Make</th>
               <td scope="col">
                 <div class="input-group">
-                 <select id='year' name="year" class="form-control"></select>
+                 <select id='year' name="year" class="form-control">
+                   <option {% if v['car_tag'].year_of_make == 2000 %} selected="selected"{% endif %}>2000</option>
+                   <option {% if v['car_tag'].year_of_make == 2001 %} selected="selected"{% endif %}>2001</option>
+                   <option {% if v['car_tag'].year_of_make == 2002 %} selected="selected"{% endif %}>2002</option>
+                   <option {% if v['car_tag'].year_of_make == 2003 %} selected="selected"{% endif %}>2003</option>
+                   <option {% if v['car_tag'].year_of_make == 2004 %} selected="selected"{% endif %}>2004</option>
+                   <option {% if v['car_tag'].year_of_make == 2005 %} selected="selected"{% endif %}>2005</option>
+                   <option {% if v['car_tag'].year_of_make == 2006 %} selected="selected"{% endif %}>2006</option>
+                   <option {% if v['car_tag'].year_of_make == 2007 %} selected="selected"{% endif %}>2007</option>
+                   <option {% if v['car_tag'].year_of_make == 2008 %} selected="selected"{% endif %}>2008</option>
+                   <option {% if v['car_tag'].year_of_make == 2009 %} selected="selected"{% endif %}>2009</option>
+                   <option {% if v['car_tag'].year_of_make == 2010 %} selected="selected"{% endif %}>2010</option>
+                   <option {% if v['car_tag'].year_of_make == 2011 %} selected="selected"{% endif %}>2011</option>
+                   <option {% if v['car_tag'].year_of_make == 2012 %} selected="selected"{% endif %}>2012</option>
+                   <option {% if v['car_tag'].year_of_make == 2013 %} selected="selected"{% endif %}>2013</option>
+                   <option {% if v['car_tag'].year_of_make == 2014 %} selected="selected"{% endif %}>2014</option>
+                   <option {% if v['car_tag'].year_of_make == 2015 %} selected="selected"{% endif %}>2015</option>
+                   <option {% if v['car_tag'].year_of_make == 2016 %} selected="selected"{% endif %}>2016</option>
+                   <option {% if v['car_tag'].year_of_make == 2017 %} selected="selected"{% endif %}>2017</option>
+                   <option {% if v['car_tag'].year_of_make == 2018 %} selected="selected"{% endif %}>2018</option>
+                   <option {% if v['car_tag'].year_of_make == 2019 %} selected="selected"{% endif %}>2019</option>
+                 </select>
                 </div>
               </td>
             </tr>
@@ -105,14 +126,14 @@
               <th scope="row">Vehicle Type</th>
               <td>
                 <select name='car-type' class="form-control">
-                  <option value="Hybrid Car">Hybrid Car</option>                    
-                  <option value="Hatchback">Hatchback</option>                    
-                  <option value="Luxury Sedan">Luxury Sedan</option>                    
-                  <option value="MPV">MPV</option>                    
-                  <option value="Mid-sized Sedan">Mid-sized Sedan</option>                    
-                  <option value="Sports">Sports</option>                    
-                  <option value="Stationwagon">Stationwagon</option>                    
-                  <option value="SUV">SUV</option> 
+                  <option value="Hybrid Car" {% if v['car_tag'].car_type == 'Hybrid Car' %} selected="selected"{% endif %}>Hybrid Car</option>                    
+                  <option value="Hatchback" {% if v['car_tag'].car_type == 'Hatchback' %} selected="selected"{% endif %}>Hatchback</option>                    
+                  <option value="Luxury Sedan" {% if v['car_tag'].car_type == 'Luxury Seda' %} selected="selected"{% endif %}>Luxury Sedan</option>                    
+                  <option value="MPV" {% if v['car_tag'].car_type == 'MPV' %} selected="selected"{% endif %}>MPV</option>                    
+                  <option value="Mid-sized Sedan" {% if v['car_tag'].car_type == 'Mid-sized Sedan' %} selected="selected"{% endif %}>Mid-sized Sedan</option>                    
+                  <option value="Sports" {% if v['car_tag'].car_type == 'Sports' %} selected="selected"{% endif %}>Sports</option>                    
+                  <option value="Stationwagon" {% if v['car_tag'].car_type == 'Stationwagon' %} selected="selected"{% endif %}>Stationwagon</option>                    
+                  <option value="SUV" {% if v['car_tag'].car_type == 'SUV' %} selected="selected"{% endif %}>SUV</option> 
                 </select>
               </td>
             </tr>
@@ -128,7 +149,7 @@
         <hr/>
 
         <a class="btn btn-danger" href="{{ url_for('index') }}">Back</a>
-        <input type='submit' value='Add to Listing' class='btn btn-primary'  />
+        <input type='submit' value='Update Vehicle Details' class='btn btn-primary'  />
 
       </form>
     </div>
@@ -139,14 +160,6 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script type="text/javascript" src="script.js"></script>
   <script>
-  /*global $*/
-    $(function(){
-     $('#year').html(function(){
-        for (let i=2000;i<=2019;i++){
-          $('#year').append($('<option></option>').val(i).html(i))
-        }
-      })
-    });
  </script>
 </body>
 

@@ -68,7 +68,7 @@ def insert_listing():
         },
         'car_price' : car_price,
         'mileage': mileage,
-        'description': description.capitalize() 
+        'description': description
     })
     
     return redirect(url_for('index'))
@@ -80,8 +80,39 @@ def edit_listing(taskid):
     })
     return render_template('edit_listing.html', v=vehicle)
 
+@app.route('/vehicle/<taskid>/edit', methods=["POST"])
 def update_listing(taskid):
+    # Getting the data from the form
+    car_make = request.form.get('car-make')
+    car_model = request.form.get('car-model')
+    reg_year = int(request.form.get('year'))
+    car_price = int(request.form.get('car-price'))
+    mileage = int(request.form.get('mileage'))
+    description = request.form.get('description')
+    car_type = request.form.get('car-type')
     
+    availability_check = request.form.get('availability')
+    if (availability_check):
+        availability = True
+    else:
+        availability = False
+    
+    datalink.update({
+        '_id':ObjectId(taskid)
+    }, {
+        '$set': {
+        'car_tag' : {
+            'car_make' : car_make, # right hand side title is not in quotes, so it's a variable
+            'car_model': car_model,
+            'year_of_make':reg_year,
+            'car_type': car_type,
+            'availability':availability
+        },
+        'car_price' : car_price,
+        'mileage': mileage,
+        'description': description
+        }
+    })    
     return redirect(url_for('index'))
 
 @app.route('/vehicle/<taskid>/delete')
