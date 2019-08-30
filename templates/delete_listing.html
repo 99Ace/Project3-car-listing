@@ -50,12 +50,11 @@
       </div>
     </nav>
     
-    <!--Overview of CRUD buttons-->
-  <h2>Panels with Contextual Classes</h2>
-  <section class="panel-group">
-    <H1>DELETE VEHICLE</H1>
-  </section>
-    
+    <div class="p-5">
+        <h1>You are about to remove car id {{ taskid._id }}</h1>
+        <a class="btn btn-warning" href="{{ url_for('index') }}">Back</a>
+        <a class='btn btn-danger' href='{{ url_for('delete',taskid=taskid['_id']) }}'>CONFIRM DELETE</a>
+    </div>
   </main>
 
 

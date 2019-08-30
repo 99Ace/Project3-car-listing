@@ -115,10 +115,19 @@ def update_listing(taskid):
     })    
     return redirect(url_for('index'))
 
-@app.route('/vehicle/<taskid>/delete')
+@app.route('/vehicle/<taskid>/confirm_delete')
 def delete_listing(taskid):
-    return render_template('delete_listing.html')
-
+    task = datalink.find_one({
+        '_id':ObjectId(taskid)
+    })
+    return render_template('delete_listing.html',taskid=task)
+    
+@app.route('/vehicle/<taskid>/delete')
+def delete(taskid):
+    datalink.delete_one({
+        '_id':ObjectId(taskid)
+    })
+    return redirect(url_for('index'))
 
 
 
