@@ -126,7 +126,6 @@
               <th scope="row">Vehicle Type</th>
               <td>
                 <select name='car-type' class="form-control">
-                  <option value="Hybrid Car" {% if v['car_tag'].car_type == 'Hybrid Car' %} selected="selected"{% endif %}>Hybrid Car</option>                    
                   <option value="Hatchback" {% if v['car_tag'].car_type == 'Hatchback' %} selected="selected"{% endif %}>Hatchback</option>                    
                   <option value="Luxury Sedan" {% if v['car_tag'].car_type == 'Luxury Seda' %} selected="selected"{% endif %}>Luxury Sedan</option>                    
                   <option value="MPV" {% if v['car_tag'].car_type == 'MPV' %} selected="selected"{% endif %}>MPV</option>                    
@@ -134,7 +133,7 @@
                   <option value="Sports" {% if v['car_tag'].car_type == 'Sports' %} selected="selected"{% endif %}>Sports</option>                    
                   <option value="Stationwagon" {% if v['car_tag'].car_type == 'Stationwagon' %} selected="selected"{% endif %}>Stationwagon</option>                    
                   <option value="SUV" {% if v['car_tag'].car_type == 'SUV' %} selected="selected"{% endif %}>SUV</option> 
-                </select>
+                  <option value="Hybrid Car" {% if v['car_tag'].car_type == 'Hybrid Car' %} selected="selected"{% endif %}>Hybrid Car</option>                    
               </td>
             </tr>
             <!--Car Availablility-->

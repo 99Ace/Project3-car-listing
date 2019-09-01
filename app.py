@@ -35,6 +35,53 @@ datalink = conn[DATABASE_NAME][COLLECTION_NAME]
 def index():
     results = datalink.find({})
     return render_template ("index.html", detail=results)
+@app.route('/', methods=["POST"])
+def search():
+#     # Getting the data from the form
+    car_make = request.form.get('search-car-make')
+    car_type = request.form.get('search-car-type')
+    year_of_make = int(request.form.get('search-year-of-make'))
+    availability = request.form.get('availability')
+    
+    if car_make == 'all' and car_type == 'all' and year_of_make == 0 and availability == 'all' :
+        result = datalink.find({})
+        return render_template("index.html", detail=result)
+  
+    elif car_make != 'all':     
+        result = datalink.find({
+            'car_tag.car_make' : car_make
+        })
+        return render_template("index.html", detail=result)
+    
+    elif car_type != 'all':     
+        result = datalink.find({
+            'car_tag.car_type' : car_type
+        })
+        return render_template("index.html", detail=result)
+
+    elif year_of_make > 0:     
+        result = datalink.find({
+            'car_tag.year_of_make': year_of_make
+        })
+        return render_template("index.html", detail=result)
+    
+    elif availability != 'all':     
+        result = datalink.find({
+            'car_tag.availability' : availability
+        })
+        return render_template("index.html", detail=result)
+    
+    
+    # if year_of_make == 0:
+    #     result = datalink.find({})
+    #     return render_template("index.html", detail=result)
+    # else:
+    #     result = datalink.find({
+    # # #         'car_tag.availability': availability,
+    #         'car_tag.year_of_make': year_of_make
+    #     })
+    #     return render_template("index.html", detail=result)
+
 
 @app.route('/vehicle/add')
 def add_listing():
@@ -50,14 +97,8 @@ def insert_listing():
     mileage = int(request.form.get('mileage'))
     description = request.form.get('description')
     car_type = request.form.get('car-type')
-    
-    availability_check = request.form.get('availability')
-    if (availability_check):
-        availability = True
-    else:
-        availability = False
-    
-    
+    availability = request.form.get('availability')
+
     datalink.insert({
         'car_tag' : {
             'car_make' : car_make, # right hand side title is not in quotes, so it's a variable
@@ -124,6 +165,21 @@ def delete(taskid):
     })
     return redirect(url_for('index'))
 
+
+
+# @app.route('/vehicle/search_listing', methods=["POST"])
+# def search_listing():
+#     # car_make = request.form.get('search-car-make')
+#     # car_model = request.form.get('car-model')
+#     # reg_year = int(request.form.get('search-year-of-make'))
+#     # car_price = int(request.form.get('search-price-max'))
+#     availability = request.form.get('availability')
+
+#     if (availability == 'available'):
+#         result = datalink.coll.find({'car_tag.availability':'Available'})
+#     return render_template('search_listing.html')
+    
+    
 
 
 # "magic code" -- boilerplate
