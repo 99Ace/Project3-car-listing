@@ -90,12 +90,7 @@ def update_listing(taskid):
     mileage = int(request.form.get('mileage'))
     description = request.form.get('description')
     car_type = request.form.get('car-type')
-    
-    availability_check = request.form.get('availability')
-    if (availability_check):
-        availability = True
-    else:
-        availability = False
+    availability = request.form.get('availability')
     
     datalink.update({
         '_id':ObjectId(taskid)
