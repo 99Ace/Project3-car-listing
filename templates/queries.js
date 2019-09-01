@@ -1,0 +1,1 @@
+coll.find({'car_tag.availability':'Available'}).pretty()
