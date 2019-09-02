@@ -119,8 +119,7 @@
           <thead class="listing">
             <tr class="table-secondary">
               <th><a href="{{ url_for('add_listing') }}" class="btn btn-danger">Add New Vehicle</a></th>
-              <th class="text-left">Make </th>
-              <th class="text-left">Model</th>
+              <th class="text-left">Make & Model</th>
               <th>Price</th>
               <th>Year of Make</th>
               <th>Mileage</th>
@@ -137,8 +136,8 @@
                 <td rowspan="3">
                   <image src="../static/image-page/mini.jpg" class="car-image" />
                 </td>
-                <td colspan="2" class="blue text-left"><b>{{ d.car_tag.car_make}} {{d.car_tag.car_model}}</b></td>
-                <td class="red"><b>
+                <td class="blue text-left"><b>{{ d.car_tag.car_make}} {{d.car_tag.car_model}}</b></td>
+                <td style="color:red"><b>
                  {{ "${:,}".format(d.car_price) }}
                   </b></td>
                 <td >{{ d.car_tag.year_of_make}}</td>
