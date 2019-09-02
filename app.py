@@ -43,45 +43,116 @@ def search():
     year_of_make = int(request.form.get('search-year-of-make'))
     availability = request.form.get('availability')
     
+    # SELECTION FOR ALL CARS WITH NO FILTER
     if car_make == 'all' and car_type == 'all' and year_of_make == 0 and availability == 'all' :
         result = datalink.find({})
         return render_template("index.html", detail=result)
-  
-    elif car_make != 'all':     
+    # ALL SELECTION SELECTED
+    if car_make != 'all' and car_type != 'all' and year_of_make != 0 and availability != 'all':                    
+        result = datalink.find({
+            'car_tag.car_make' : car_make,
+            'car_tag.car_type' : car_type,
+            'car_tag.year_of_make': year_of_make,
+            'car_tag.availability' : availability
+        })
+        return render_template("index.html", detail=result)
+    
+    # EITHER OF 3 CRITERIA SELECTED
+    if car_make != 'all' and car_type != 'all' and year_of_make != 0 and availability == 'all':
+        result = datalink.find({
+            'car_tag.car_make' : car_make,
+            'car_tag.car_type' : car_type,
+            'car_tag.year_of_make': year_of_make
+        })
+        return render_template("index.html", detail=result)
+    if car_make != 'all' and car_type != 'all' and year_of_make == 0 and availability != 'all':
+        result = datalink.find({
+            'car_tag.car_make' : car_make,
+            'car_tag.car_type' : car_type,
+            'car_tag.availability' : availability
+        })
+        return render_template("index.html", detail=result)
+    if car_make != 'all' and car_type == 'all' and year_of_make != 0 and availability != 'all':
+        result = datalink.find({
+            'car_tag.car_make' : car_make,
+            'car_tag.year_of_make': year_of_make,
+            'car_tag.availability' : availability
+        })
+        return render_template("index.html", detail=result)    
+    if car_make == 'all' and car_type != 'all' and year_of_make != 0 and availability != 'all':                    
+        result = datalink.find({
+            'car_tag.car_type' : car_type,
+            'car_tag.year_of_make': year_of_make,
+            'car_tag.availability' : availability
+        })
+        return render_template("index.html", detail=result)
+        
+    # EITHER OF 2 CRITERIA SELECTED    
+    if car_make != 'all' and car_type != 'all' and year_of_make == 0 and availability == 'all':
+        result = datalink.find({
+            'car_tag.car_make' : car_make,
+            'car_tag.car_type' : car_type
+        })
+        return render_template("index.html", detail=result)
+    if car_make != 'all' and car_type == 'all' and year_of_make != 0 and availability == 'all':
+        result = datalink.find({
+            'car_tag.car_make' : car_make,
+            'car_tag.year_of_make': year_of_make
+        })
+        return render_template("index.html", detail=result)  
+    if car_make != 'all' and car_type == 'all' and year_of_make == 0 and availability != 'all':
+        result = datalink.find({
+            'car_tag.car_make' : car_make,
+            'car_tag.availability' : availability
+
+        })
+        return render_template("index.html", detail=result)       
+     
+    if car_make == 'all' and car_type != 'all' and year_of_make != 0 and availability == 'all':
+        result = datalink.find({
+            'car_tag.car_type' : car_type,
+            'car_tag.year_of_make': year_of_make
+        })
+        return render_template("index.html", detail=result)  
+    if car_make == 'all' and car_type != 'all' and year_of_make == 0 and availability != 'all':
+        result = datalink.find({
+            'car_tag.car_type' : car_type,
+            'car_tag.availability' : availability
+        })
+        return render_template("index.html", detail=result)  
+
+    if car_make == 'all' and car_type == 'all' and year_of_make != 0 and availability != 'all':
+        result = datalink.find({
+            'car_tag.year_of_make': year_of_make,
+            'car_tag.availability' : availability
+        })
+        return render_template("index.html", detail=result)  
+       
+           
+    # EITHER OF 1 CRITERIA SELECTED       
+    if car_make != 'all' and car_type == 'all' and year_of_make == 0 and availability == 'all' :
         result = datalink.find({
             'car_tag.car_make' : car_make
         })
         return render_template("index.html", detail=result)
-    
-    elif car_type != 'all':     
+    if car_make == 'all' and car_type != 'all' and year_of_make == 0 and availability == 'all' :
         result = datalink.find({
             'car_tag.car_type' : car_type
         })
         return render_template("index.html", detail=result)
-
-    elif year_of_make > 0:     
+    if car_make == 'all' and car_type == 'all' and year_of_make != 0 and availability == 'all' :
         result = datalink.find({
             'car_tag.year_of_make': year_of_make
         })
         return render_template("index.html", detail=result)
-    
-    elif availability != 'all':     
+    if car_make == 'all' and car_type == 'all' and year_of_make == 0 and availability != 'all' :
         result = datalink.find({
             'car_tag.availability' : availability
         })
         return render_template("index.html", detail=result)
     
     
-    # if year_of_make == 0:
-    #     result = datalink.find({})
-    #     return render_template("index.html", detail=result)
-    # else:
-    #     result = datalink.find({
-    # # #         'car_tag.availability': availability,
-    #         'car_tag.year_of_make': year_of_make
-    #     })
-    #     return render_template("index.html", detail=result)
-
+ 
 
 @app.route('/vehicle/add')
 def add_listing():
