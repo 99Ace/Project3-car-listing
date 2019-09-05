@@ -1,0 +1,1 @@
+{"value":"coll.find({'car_tag.availability':'Available'}).pretty()\n\ncoll.find({\n    'car_tag.availability':'Sold','car_tag.car_make':'Volvo'\n})\n\n","changed":true,"filter":false,"title":"queries.js","tooltip":"/templates/queries.js","ace":{},"undoManager":{"mark":-1,"position":-1,"stack":[]},"timestamp":1567390388320}
